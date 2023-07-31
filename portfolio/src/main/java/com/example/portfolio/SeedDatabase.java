@@ -3,7 +3,7 @@ package com.example.portfolio;
 import com.example.portfolio.model.Stock;
 import com.example.portfolio.model.repository.StockRepository;
 
-import jakarta.annotation.PostConstruct;
+import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,15 +12,6 @@ public class SeedDatabase {
 
     @Autowired
     private StockRepository repository;
-
-    @PostConstruct
-    public void init() {
-
-        @Component
-        public class SeedDatabase {
-
-            @Autowired
-            private StockRepository repository;
 
             @PostConstruct
             public void init() {
@@ -45,10 +36,6 @@ public class SeedDatabase {
                 repository.save(new Stock("VZ", "Verizon Communications Inc.", 55.50, 0.35, 70.0));
                 repository.save(new Stock("KO", "The Coca-Cola Company", 55.75, 0.30, 120.0));
             }
-
-        }
-
-    }
 
 }
 
