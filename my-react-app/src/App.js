@@ -1,15 +1,8 @@
-import React from "react";
+import React, {Component, useEffect} from "react";
 import {Chart} from "react-google-charts";
 
 import logo from './logo.png';
 import "./App.css";
-
-export const options = {
-  pieHole: 0.5,
-  is3D: false,
-  backgroundColor: "#f8f6f7",
-  chartArea: {width: "100%", height: "100%"}
-};
 function Watchlist(props){
   const data = props.data
   return(
@@ -49,7 +42,12 @@ function Summary_component(props){
   )
 }
 function App() {
-
+  const options = {
+    pieHole: 0.5,
+    is3D: false,
+    backgroundColor: "#f8f6f7",
+    chartArea: {width: "100%", height: "100%"}
+  };
   const data = [{"ticker":"AAPL","companyName":"Apple Inc.","price":150.5,"dailyChange":-0.33,"quantity":100.0,"sector":"Technology"},{"ticker":"GOOGL","companyName":"Alphabet Inc.","price":2800.2,"dailyChange":0.18,"quantity":50.0,"sector":"Technology"},{"ticker":"AMZN","companyName":"Amazon.com Inc.","price":3250.75,"dailyChange":-0.48,"quantity":75.0,"sector":"Technology"},{"ticker":"MSFT","companyName":"Microsoft Corporation","price":290.4,"dailyChange":-0.21,"quantity":120.0,"sector":"Technology"},{"ticker":"TSLA","companyName":"Tesla","price":700.0,"dailyChange":0.38,"quantity":30.0,"sector":"Automotive"},{"ticker":"JPM","companyName":"JPMorgan Chase & Co.","price":150.8,"dailyChange":0.17,"quantity":90.0,"sector":"Finance"},{"ticker":"NVDA","companyName":"NVIDIA Corporation","price":220.3,"dailyChange":-0.1,"quantity":65.0,"sector":"Technology"},{"ticker":"WMT","companyName":"Walmart Inc.","price":140.1,"dailyChange":0.32,"quantity":110.0,"sector":"Retail"},{"ticker":"JNJ","companyName":"Johnson & Johnson","price":170.25,"dailyChange":0.43,"quantity":85.0,"sector":"Healthcare"},{"ticker":"BAC","companyName":"Bank of America Corporation","price":40.5,"dailyChange":-0.16,"quantity":150.0,"sector":"Finance"},{"ticker":"XOM","companyName":"Exxon Mobil Corporation","price":60.7,"dailyChange":0.07,"quantity":70.0,"sector":"Energy"},{"ticker":"PFE","companyName":"Pfizer Inc.","price":45.8,"dailyChange":0.21,"quantity":200.0,"sector":"Healthcare"},{"ticker":"HD","companyName":"The Home Depot","price":350.9,"dailyChange":-0.17,"quantity":40.0,"sector":"Retail"},{"ticker":"V","companyName":"Visa Inc.","price":250.6,"dailyChange":-0.02,"quantity":55.0,"sector":"Finance"},{"ticker":"PG","companyName":"Procter & Gamble Co.","price":135.0,"dailyChange":-0.13,"quantity":100.0,"sector":"Consumer Goods"},{"ticker":"MA","companyName":"Mastercard Incorporated","price":390.1,"dailyChange":0.12,"quantity":25.0,"sector":"Finance"},{"ticker":"INTC","companyName":"Intel Corporation","price":55.25,"dailyChange":-0.32,"quantity":80.0,"sector":"Technology"},{"ticker":"CRM","companyName":"Salesforce","price":280.0,"dailyChange":0.32,"quantity":45.0,"sector":"Technology"},{"ticker":"VZ","companyName":"Verizon Communications Inc.","price":55.5,"dailyChange":0.41,"quantity":70.0,"sector":"Telecommunications"},{"ticker":"KO","companyName":"The Coca-Cola Company","price":55.75,"dailyChange":-0.05,"quantity":120.0,"sector":"Consumer Goods"}]
   let cashComponent = "200000"
   const formatPortData = [["Ticker", "Price"]]
@@ -59,6 +57,10 @@ function App() {
   let portfolioValue = 0
   let totalPnL = 0
 
+  useEffect(()=>{
+    const response = await fetch("http://localhost:8080/api/stock/");
+    console.log("Download complete:", response);
+  },[])
   
   data.forEach((stock)=>{
     formatPortData.push([stock["ticker"],stock["quantity"]*stock["price"]])
