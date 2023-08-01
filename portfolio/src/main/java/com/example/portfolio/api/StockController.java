@@ -38,6 +38,7 @@ public class StockController {
             Stock result2 = result.get();
             Double newQty = result2.getQuantity() + qty;
             result2.setQuantity(newQty);
+            repo.save(result2);
         } else {
             throw new ResourceNotFoundException();
         }
