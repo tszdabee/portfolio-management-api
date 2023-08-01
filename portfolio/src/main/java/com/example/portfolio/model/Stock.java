@@ -10,13 +10,15 @@ public class Stock {
     private Double price;
     private Double dailyChange;
     private Double quantity;
+    private String sector;
 
-    public Stock(String ticker, String companyName, Double price, Double dailyChange, Double quantity){
+    public Stock(String ticker, String companyName, Double price, Double dailyChange, Double quantity, String sector){
         this.ticker = ticker;
         this.companyName = companyName;
         this.price = price;
         this.dailyChange = dailyChange;
         this.quantity = quantity;
+        this.sector = sector;
     }
 
     public String getTicker(){
@@ -37,6 +39,10 @@ public class Stock {
 
     public Double getQuantity(){
         return quantity;
+    }
+
+    public String getSector(){
+        return sector;
     }
 
 
