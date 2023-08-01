@@ -48,4 +48,8 @@ public class Stock {
     public void setQuantity(Double qty) {
         this.quantity = qty;
     }
+
+    public void setPrice(double price) { this.price = price; }
+
+    public void setDailyChange(double variation) { this.dailyChange = variation; }
 }
