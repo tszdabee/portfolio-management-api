@@ -31,16 +31,34 @@ public class StockController {
         }
     }
 
-    @PutMapping(value="/{ticker}/buyStock/{qty}")
-    public void updateStockQuantity(@PathVariable String ticker, @PathVariable int qty) {
-        Optional<Stock> result = repo.findById( ticker );
-        if ( result.isPresent() ) {
-            Stock result2 = result.get();
-            Double newQty = result2.getQuantity() + qty;
-            result2.setQuantity(newQty);
-            repo.save(result2);
+    private void updateStockQuantity(String ticker, int qty, boolean isBuy) {
+        Optional<Stock> result = repo.findById(ticker);
+        if (result.isPresent()) {
+            Stock stock = result.get();
+            if (isBuy) {
+                if (qty <= 0) {
+                    throw new IllegalArgumentException("Quantity must be greater than 0 for buying stock.");
+                }
+                stock.setQuantity(stock.getQuantity() + qty);
+            } else {
+                if (qty <= 0 || qty > stock.getQuantity()) {
+                    throw new IllegalArgumentException("Quantity must be greater than 0 for selling stock.");
+                }
+                stock.setQuantity(stock.getQuantity() - qty);
+            }
+            repo.save(stock);
         } else {
             throw new ResourceNotFoundException();
         }
+    }
+
+    @PutMapping("/{ticker}/buyStock/{qty}")
+    public void buyStock(@PathVariable String ticker, @PathVariable int qty) {
+        updateStockQuantity(ticker, qty, true);
+    }
+
+    @PutMapping("/{ticker}/sellStock/{qty}")
+    public void sellStock(@PathVariable String ticker, @PathVariable int qty) {
+        updateStockQuantity(ticker, qty, false);
     }
 }
