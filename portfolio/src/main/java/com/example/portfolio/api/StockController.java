@@ -61,4 +61,13 @@ public class StockController {
     public void sellStock(@PathVariable String ticker, @PathVariable int qty) {
         updateStockQuantity(ticker, qty, false);
     }
+
+    @DeleteMapping("{ticker}")
+    public void deleteStock(@PathVariable String ticker){
+        if (repo.existsById(ticker)){
+            repo.deleteById(ticker);
+        }else{
+            throw new ResourceNotFoundException();
+        }
+    }
 }
