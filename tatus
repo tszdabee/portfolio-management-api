@@ -1,0 +1,23 @@
+[33mcommit 66d26e302e5c7ff1d1f65696ca727138f74f4eb7[m[33m ([m[1;36mHEAD -> [m[1;32mbackend[m[33m)[m
+Author: Tsz <tszyyung@gmail.com>
+Date:   Mon Jul 31 18:31:18 2023 +0000
+
+    Added Mongo Seed Database
+
+[33mcommit 11421c264d61dd8667860a176afa9bf8e80d9a08[m
+Author: Sakshi Padhiar <sakshipadhiar2000@gmail.com>
+Date:   Fri Jul 28 15:11:55 2023 -0400
+
+    Created REST controller
+
+[33mcommit 1ef4957622f2a599bbddf6db4d3cd2927f3a17a1[m
+Author: Sakshi Padhiar <sakshipadhiar2000@gmail.com>
+Date:   Fri Jul 28 14:42:30 2023 -0400
+
+    Initial Spring Boot Setup
+
+[33mcommit 4564205ee8af635122902b075f1cbd9f3dc4f287[m
+Author: Tsz <tszyyung@gmail.com>
+Date:   Fri Jul 28 19:24:23 2023 +0100
+
+    Initial commit

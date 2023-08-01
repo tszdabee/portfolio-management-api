@@ -45,5 +45,7 @@ public class Stock {
         return sector;
     }
 
-
+    public void setQuantity(Double qty) {
+        this.quantity = qty;
+    }
 }
