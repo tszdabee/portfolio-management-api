@@ -30,4 +30,16 @@ public class StockController {
             throw new ResourceNotFoundException();
         }
     }
+
+    @PutMapping(value="/{ticker}/buyStock/{qty}")
+    public void updateStockQuantity(@PathVariable String ticker, @PathVariable int qty) {
+        Optional<Stock> result = repo.findById( ticker );
+        if ( result.isPresent() ) {
+            Stock result2 = result.get();
+            Double newQty = result2.getQuantity() + qty;
+            result2.setQuantity(newQty);
+        } else {
+            throw new ResourceNotFoundException();
+        }
+    }
 }
