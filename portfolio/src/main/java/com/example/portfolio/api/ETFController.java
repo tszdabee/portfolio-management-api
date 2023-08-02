@@ -19,11 +19,11 @@ public class ETFController {
     private ETFRepository repo;
 
     private double generateRandomPriceVariation(ETF etf) {
-        double variationPercentage = ThreadLocalRandom.current().nextDouble(-0.10, 0.10);
+        double variationPercentage = ThreadLocalRandom.current().nextDouble(-0.025, 0.025);
         return variationPercentage;
     }
 
-    @Scheduled(fixedRate = 10000)
+    @Scheduled(fixedRate = 3000)
     public void updateETFPrices() {
         List<ETF> etfs = repo.findAll();
         for (ETF etf : etfs) {

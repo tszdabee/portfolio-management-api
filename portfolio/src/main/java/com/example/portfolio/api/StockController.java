@@ -19,11 +19,11 @@ public class StockController {
     private StockRepository repo;
 
     private double generateRandomPriceVariation(Stock stock) {
-        double variationPercentage = ThreadLocalRandom.current().nextDouble(-0.10, 0.10);
+        double variationPercentage = ThreadLocalRandom.current().nextDouble(-0.05, 0.05);
         return variationPercentage;
     }
 
-    @Scheduled(fixedRate = 10000)
+    @Scheduled(fixedRate = 3000)
     public void updateStockPrices() {
         List<Stock> stocks = repo.findAll();
         for (Stock stock : stocks) {
