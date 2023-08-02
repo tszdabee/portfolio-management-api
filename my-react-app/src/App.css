@@ -66,10 +66,15 @@ img{
   color: #61dafb;
 }
 .charts-overview{
+  display:block;
+  flex-direction: column;
+}
+
+.charts-block{
   display:flex;
   margin-left:60px;
-
 }
+
 .summary{
   margin-top:60px;
 }
@@ -110,8 +115,9 @@ img{
 }
 .logo{
   background-color: #2243ff;
-  flex-direction: column;
+  flex-direction: row;
   display: flex;
+  
 }
 .odd-box-element{
   background-color: #E5e4e2;
