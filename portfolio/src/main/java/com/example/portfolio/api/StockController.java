@@ -19,11 +19,11 @@ public class StockController {
     private StockRepository repo;
 
     private double generateRandomPriceVariation(Stock stock) {
-        double variationPercentage = ThreadLocalRandom.current().nextDouble(-0.10, 0.10);
+        double variationPercentage = ThreadLocalRandom.current().nextDouble(-0.05, 0.05);
         return variationPercentage;
     }
 
-    @Scheduled(fixedRate = 10000)
+    @Scheduled(fixedRate = 3000)
     public void updateStockPrices() {
         List<Stock> stocks = repo.findAll();
         for (Stock stock : stocks) {
@@ -80,5 +80,14 @@ public class StockController {
     @PutMapping("/{ticker}/sellStock/{qty}")
     public void sellStock(@PathVariable String ticker, @PathVariable int qty) {
         updateStockQuantity(ticker, qty, false);
+    }
+
+    @DeleteMapping("{ticker}")
+    public void deleteStock(@PathVariable String ticker){
+        if (repo.existsById(ticker)){
+            repo.deleteById(ticker);
+        }else{
+            throw new ResourceNotFoundException();
+        }
     }
 }
