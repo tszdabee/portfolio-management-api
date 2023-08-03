@@ -41,8 +41,8 @@ function Watchlist(props){
               <div key={index+"change"} className = {[(index%2==0?"odd-box-element":"even-box-element"),((stock["dailyChange"]<0)?"redText":"greenText")].join(" ")}>{(Math.round(stock["dailyChange"]*10000)/100)}</div>
               <div key={index+"quantity"} className = {(index%2==0?"odd-box-element":"even-box-element")}>{stock["quantity"]}</div> 
               <div style={{width:"120px", margin:0,padding:0,display:"inline-block",backgroundColor:(index%2==0?"#E5e4e2":"#f9f8f8"), paddingTop:"2px"}}>
-                <button className="button button1">Buy</button>
-                <button className="button button3">Sell</button>
+                <button onClick={() => handleBuy(stock['ticker'])} className="button button1">Buy</button>
+                <button onClick={() => handleSell(stock['ticker'])}className="button button3">Sell</button>
               </div>
             </div>)
           } )
@@ -89,7 +89,6 @@ function App() {
       }
     }
     performanceData.push([performanceData.length,myBalance])
-    console.log("changes")
   },[data])
 
 
@@ -129,7 +128,6 @@ function App() {
     else{tempSectorSummer[stock["sector"]]=1}
   })
   formatPortData.push(["Cash",parseFloat(cashComponent)])
-  console.log(formatPortData)
 
   let keys = Object.keys(tempSectorSummer)
   keys.forEach(value=>{
