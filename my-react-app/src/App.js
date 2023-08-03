@@ -4,7 +4,7 @@ import {axios} from "axios";
 import logo from './logo.png';
 import "./App.css";
 import moreinfo from "./menu-symbol-of-three-parallel-lines-svgrepo-com.svg"
-
+import tradesense from './tradesense-logo.png'
 
 function Watchlist(props){
   const data = props.data
@@ -126,6 +126,7 @@ function App() {
     <div className="App">
       <div className="logo">
         <img src="https://www.rbcroyalbank.com/dvl/v1.0/assets/images/logos/rbc-logo-shield.svg"  width="48" height="60" alt="RBC"></img>
+        <img src={tradesense} height="60" alt="Tradesense Logo"></img>
         <img src={moreinfo} style={{position:"relative", left:'90vw', top:'15px'}} width="30" height="30" alt="moreinfo"></img>
       </div>
       <div className="App-header">
