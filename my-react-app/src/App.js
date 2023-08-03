@@ -8,14 +8,23 @@ import tradesense from './tradesense-logo.png'
 function Watchlist(props){
 
   const data = props.data
+  const updateCashComponent = props.updateCash;
+
   const handleBuy = (ticker) => {
     //handle buy action
+    const stockToBuy = data.find((stock) => stock['ticker'] == ticker);
+    const buyCost = stockToBuy['price'];
+    updateCashComponent(-buyCost);
     fetch(`http://localhost:8080/api/stock/${ticker}/buyStock/1`, {method: 'PUT'})
     .then(console.log(`Bought stock ${ticker}`))
+    .then(console.log(`price of ${buyCost}`))
     .catch(err => console.error(err));
   }
   const handleSell = (ticker) => {
     //handle sell action
+    const stockToSell = data.find((stock) => stock['ticker'] == ticker);
+    const sellCost = stockToSell['price'];
+    updateCashComponent(sellCost);
     fetch(`http://localhost:8080/api/stock/${ticker}/sellStock/1`, {method: 'PUT'})
     .then(console.log(`Sold stock ${ticker}`))
     .catch(err => console.error(err));
@@ -109,7 +118,11 @@ function App() {
     legend: {position:"none"}
   };
   //const data = [{"ticker":"AAPL","companyName":"Apple Inc.","price":150.5,"dailyChange":-0.33,"quantity":100.0,"sector":"Technology"},{"ticker":"GOOGL","companyName":"Alphabet Inc.","price":2800.2,"dailyChange":0.18,"quantity":50.0,"sector":"Technology"},{"ticker":"AMZN","companyName":"Amazon.com Inc.","price":3250.75,"dailyChange":-0.48,"quantity":75.0,"sector":"Technology"},{"ticker":"MSFT","companyName":"Microsoft Corporation","price":290.4,"dailyChange":-0.21,"quantity":120.0,"sector":"Technology"},{"ticker":"TSLA","companyName":"Tesla","price":700.0,"dailyChange":0.38,"quantity":30.0,"sector":"Automotive"},{"ticker":"JPM","companyName":"JPMorgan Chase & Co.","price":150.8,"dailyChange":0.17,"quantity":90.0,"sector":"Finance"},{"ticker":"NVDA","companyName":"NVIDIA Corporation","price":220.3,"dailyChange":-0.1,"quantity":65.0,"sector":"Technology"},{"ticker":"WMT","companyName":"Walmart Inc.","price":140.1,"dailyChange":0.32,"quantity":110.0,"sector":"Retail"},{"ticker":"JNJ","companyName":"Johnson & Johnson","price":170.25,"dailyChange":0.43,"quantity":85.0,"sector":"Healthcare"},{"ticker":"BAC","companyName":"Bank of America Corporation","price":40.5,"dailyChange":-0.16,"quantity":150.0,"sector":"Finance"},{"ticker":"XOM","companyName":"Exxon Mobil Corporation","price":60.7,"dailyChange":0.07,"quantity":70.0,"sector":"Energy"},{"ticker":"PFE","companyName":"Pfizer Inc.","price":45.8,"dailyChange":0.21,"quantity":200.0,"sector":"Healthcare"},{"ticker":"HD","companyName":"The Home Depot","price":350.9,"dailyChange":-0.17,"quantity":40.0,"sector":"Retail"},{"ticker":"V","companyName":"Visa Inc.","price":250.6,"dailyChange":-0.02,"quantity":55.0,"sector":"Finance"},{"ticker":"PG","companyName":"Procter & Gamble Co.","price":135.0,"dailyChange":-0.13,"quantity":100.0,"sector":"Consumer Goods"},{"ticker":"MA","companyName":"Mastercard Incorporated","price":390.1,"dailyChange":0.12,"quantity":25.0,"sector":"Finance"},{"ticker":"INTC","companyName":"Intel Corporation","price":55.25,"dailyChange":-0.32,"quantity":80.0,"sector":"Technology"},{"ticker":"CRM","companyName":"Salesforce","price":280.0,"dailyChange":0.32,"quantity":45.0,"sector":"Technology"},{"ticker":"VZ","companyName":"Verizon Communications Inc.","price":55.5,"dailyChange":0.41,"quantity":70.0,"sector":"Telecommunications"},{"ticker":"KO","companyName":"The Coca-Cola Company","price":55.75,"dailyChange":-0.05,"quantity":120.0,"sector":"Consumer Goods"}]
-  let cashComponent = "200000"
+  //let cashComponent = "200000"
+  const [cashComponent, setCashComponent] = useState(200000);
+  const updateCashComponent = (amount) => {
+    setCashComponent((prevCash) => prevCash + amount);
+  }
   const formatPortData = [["Ticker", "Price"]]
   const formatSectorData = [["Ticker", "Price"]]
   let tempSectorSummer = {}
@@ -139,7 +152,6 @@ function App() {
   
   return (
     
-    
     <div className="App">
       <div className="logo">
         <img src="https://www.rbcroyalbank.com/dvl/v1.0/assets/images/logos/rbc-logo-shield.svg"  width="48" height="60" alt="RBC"></img>
@@ -147,11 +159,11 @@ function App() {
         <img src={moreinfo} style={{position:"relative", marginLeft:'auto',marginRight:"10px", top:'15px'}} width="30" height="30" alt="moreinfo"></img>
       </div>
       <div className="App-header">
-        <Watchlist data={data}/>
+        <Watchlist data={data} updateCash={updateCashComponent}/>
         <div className="overview">
           <div className="summary">
             <Summary_component value={(Math.round(myBalance*100)/100).toLocaleString("en-US")} title="My Balance"/>
-            <Summary_component value={parseFloat(cashComponent).toLocaleString("en-US")} title="Cash Balance"/>
+            <Summary_component value={(Math.round(parseFloat(cashComponent)*100)/100).toLocaleString("en-US")} title="Cash Balance"/>
             <Summary_component value={(Math.round(portfolioValue*100)/100).toLocaleString("en-US")} title="Profolio Value"/>
             <Summary_component value={(Math.round(totalPnL*100)/100).toLocaleString("en-US")} title="Total P/L"/>
           </div>
