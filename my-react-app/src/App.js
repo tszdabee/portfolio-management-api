@@ -10,11 +10,15 @@ function Watchlist(props){
   const data = props.data
   const handleBuy = (ticker) => {
     //handle buy action
-    console.log('Buy ${ticker}')
+    fetch(`http://localhost:8080/api/stock/${ticker}/buyStock/1`, {method: 'PUT'})
+    .then(console.log(`Bought stock ${ticker}`))
+    .catch(err => console.error(err));
   }
   const handleSell = (ticker) => {
     //handle sell action
-    console.log('Sell ${ticker}')
+    fetch(`http://localhost:8080/api/stock/${ticker}/sellStock/1`, {method: 'PUT'})
+    .then(console.log(`Sold stock ${ticker}`))
+    .catch(err => console.error(err));
   }
   return(
       <div className="watchlist-container">
