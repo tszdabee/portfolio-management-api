@@ -19,7 +19,7 @@ public class StockController {
     private StockRepository repo;
 
     private double generateRandomPriceVariation(Stock stock) {
-        double variationPercentage = ThreadLocalRandom.current().nextDouble(-0.03, 0.04);
+        double variationPercentage = ThreadLocalRandom.current().nextDouble(-0.035, 0.04);
         return variationPercentage;
     }
 

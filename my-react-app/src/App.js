@@ -8,6 +8,14 @@ import tradesense from './tradesense-logo.png'
 
 function Watchlist(props){
   const data = props.data
+  const handleBuy = (ticker) => {
+    //handle buy action
+    console.log('Buy ${ticker}')
+  }
+  const handleSell = (ticker) => {
+    //handle sell action
+    console.log('Sell ${ticker}')
+  }
   return(
       <div className="watchlist-container">
         <div className="watchlist-header">
@@ -16,6 +24,7 @@ function Watchlist(props){
           <div className="watchlist-header-element">Price</div>
           <div className="watchlist-header-element">Change</div>
           <div className="watchlist-header-element">Shares</div>
+          <div className="watchlist-header-element">Actions</div>
         </div>
         {
           data.map((stock, index) =>{ 
@@ -25,7 +34,11 @@ function Watchlist(props){
               <div key={index+"companyName"} className = {(index%2==0?"odd-box-element-name":"even-box-element-name")}>{stock["companyName"]}</div>
               <div key={index+"price"} className = {(index%2==0?"odd-box-element":"even-box-element")}>{(Math.round(stock["price"]*100)/100)}</div>
               <div key={index+"change"} className = {[(index%2==0?"odd-box-element":"even-box-element"),((stock["dailyChange"]<0)?"redText":"greenText")].join(" ")}>{(Math.round(stock["dailyChange"]*10000)/100)}</div>
-              <div key={index+"quantity"} className = {(index%2==0?"odd-box-element":"even-box-element")}>{stock["quantity"]}</div> 
+              <div key={index+"quantity"} className = {(index%2==0?"odd-box-element":"even-box-element")}>{stock["quantity"]}</div>
+              <div key={index + 'actions'} className = "action-buttons">
+                <button onClick={() => handleBuy(stock['ticker'])}>Buy</button> 
+                <button onClick={() => handleSell(stock['ticker'])}>Sell</button>
+              </div>
             </div>)
           } )
         }
