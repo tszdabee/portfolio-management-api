@@ -84,7 +84,7 @@ function Summary_component(props){
 
 function App() {
   const [data,setData] = useState([])
-  const [performanceData, setPerformanceData] = useState([["time", "value"]])
+  const [performanceData, setPerformanceData] = useState([["time", "value"],[new Date(),0.0]])
   const [time, setTime] = useState(Date.now());
 
   useEffect(() => {
@@ -102,18 +102,21 @@ function App() {
   useEffect(()=>{
     if(performanceData.length==31){
       performanceData.splice(1,1)
-      for(let i=1; i<30; i++){
-        performanceData[i][0]-=1
-      }
     }
-    performanceData.push([performanceData.length,myBalance])
+    performanceData.push([(new Date((performanceData[performanceData.length-1][0]).valueOf()+1000*3600*24)),myBalance])
+    
+    console.log(performanceData[performanceData.length-2][0])
+    console.log(performanceData[performanceData.length-2][1])
+    console.log(performanceData[performanceData.length-1][0])
+    console.log(performanceData[performanceData.length-1][1])
   },[data])
+
 
 
   const options = {
     pieHole: 0.5,
     is3D: false,
-    backgroundColor: "#f8f6f7",
+    backgroundColor: "#f8f6f7", 
     chartArea: {width: "90%", height: "90%"},
     legend: {position:"none"}
   };
@@ -121,9 +124,9 @@ function App() {
   const line_chart_options = {
     curveType: "function",
     backgroundColor: "#f8f6f7",
-    chartArea: {width: "85%", height: "90%"},
+    chartArea: {width: "85%", height: "80%"},
     vAxis: {scaleType:"discrete"},
-    hAxis: {textPosition: "none"},
+    hAxis: {format: "MM/dd",ticks:"dateTicks"},
     legend: {position:"none"},
     series: { 
       0:{color:'#4CAF50'}
@@ -185,7 +188,7 @@ function App() {
               <Chart
                 chartType="AreaChart"
                 width="750px"
-                height="450px"
+                height="500px"
                 data={performanceData}
                 options={line_chart_options}
                 style = {{marginLeft:"10px"}}
