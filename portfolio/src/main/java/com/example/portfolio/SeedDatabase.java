@@ -26,6 +26,7 @@ public class SeedDatabase {
     @PostConstruct
     public void init() {
         repository1.save( new Stock("NFLX" ,"Netflix Inc.", 425.50, -0.45, 15.0, "Technology") );
+        repository1.save( new Stock("BABA" ,"Alibaba Group Holding LTD", 98.2, -0.45, 55.0, "Technology") );
         repository1.save( new Stock("AAPL" ,"Apple Inc.", 150.50, -0.33, 50.0, "Technology") );
         repository1.save( new Stock("GOOGL" ,"Alphabet Inc.", 127.20, 0.18, 50.0, "Technology") );
         repository1.save( new Stock("AMZN" ,"Amazon.com Inc.", 127.75, -0.48, 50.0, "Technology") );

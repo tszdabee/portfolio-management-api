@@ -1,12 +1,12 @@
 import React, {Component, useEffect, useState} from "react";
 import {Chart} from "react-google-charts";
-import {axios} from "axios";
 import logo from './logo.png';
 import "./App.css";
 import moreinfo from "./menu-symbol-of-three-parallel-lines-svgrepo-com.svg"
 import tradesense from './tradesense-logo.png'
 
 function Watchlist(props){
+
   const data = props.data
   const handleBuy = (ticker) => {
     //handle buy action
@@ -20,15 +20,16 @@ function Watchlist(props){
     .then(console.log(`Sold stock ${ticker}`))
     .catch(err => console.error(err));
   }
+
   return(
-      <div className="watchlist-container">
+      <div className="watchlist-container" style={{backgroundColor:(data.length%2==0)?"#E5e4e2":"#f9f8f8"}}>
         <div className="watchlist-header">
-          <div className="watchlist-header-element">Ticker</div>
-          <div className="watchlist-header-element-name">Name</div>
-          <div className="watchlist-header-element">Price</div>
-          <div className="watchlist-header-element">Change</div>
-          <div className="watchlist-header-element">Shares</div>
-          <div className="watchlist-header-element">Actions</div>
+          <div className="watchlist-header-element watchlist-header-element-normal">Ticker</div>
+          <div className="watchlist-header-element watchlist-header-element-name">Name</div>
+          <div className="watchlist-header-element watchlist-header-element-normal">Price</div>
+          <div className="watchlist-header-element watchlist-header-element-normal">Change</div>
+          <div className="watchlist-header-element watchlist-header-element-normal">Shares</div>
+          <div className="watchlist-header-element watchlist-header-element-actions">Actions</div>
         </div>
         {
           data.map((stock, index) =>{ 
@@ -38,10 +39,10 @@ function Watchlist(props){
               <div key={index+"companyName"} className = {(index%2==0?"odd-box-element-name":"even-box-element-name")}>{stock["companyName"]}</div>
               <div key={index+"price"} className = {(index%2==0?"odd-box-element":"even-box-element")}>{(Math.round(stock["price"]*100)/100)}</div>
               <div key={index+"change"} className = {[(index%2==0?"odd-box-element":"even-box-element"),((stock["dailyChange"]<0)?"redText":"greenText")].join(" ")}>{(Math.round(stock["dailyChange"]*10000)/100)}</div>
-              <div key={index+"quantity"} className = {(index%2==0?"odd-box-element":"even-box-element")}>{stock["quantity"]}</div>
-              <div key={index + 'actions'} className = "action-buttons">
-                <button onClick={() => handleBuy(stock['ticker'])}>Buy</button> 
-                <button onClick={() => handleSell(stock['ticker'])}>Sell</button>
+              <div key={index+"quantity"} className = {(index%2==0?"odd-box-element":"even-box-element")}>{stock["quantity"]}</div> 
+              <div style={{width:"120px", margin:0,padding:0,display:"inline-block",backgroundColor:(index%2==0?"#E5e4e2":"#f9f8f8"), paddingTop:"2px"}}>
+                <button className="button button1">Buy</button>
+                <button className="button button3">Sell</button>
               </div>
             </div>)
           } )
@@ -145,7 +146,7 @@ function App() {
       <div className="logo">
         <img src="https://www.rbcroyalbank.com/dvl/v1.0/assets/images/logos/rbc-logo-shield.svg"  width="48" height="60" alt="RBC"></img>
         <img src={tradesense} height="60" alt="Tradesense Logo"></img>
-        <img src={moreinfo} style={{position:"relative", left:'90vw', top:'15px'}} width="30" height="30" alt="moreinfo"></img>
+        <img src={moreinfo} style={{position:"relative", marginLeft:'auto',marginRight:"10px", top:'15px'}} width="30" height="30" alt="moreinfo"></img>
       </div>
       <div className="App-header">
         <Watchlist data={data}/>
