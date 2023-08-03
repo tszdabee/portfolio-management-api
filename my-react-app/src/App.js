@@ -8,26 +8,35 @@ import tradesense from './tradesense-logo.png'
 function Watchlist(props){
 
   const data = props.data
+  const cashComponent = props.cashComponent;
   const updateCashComponent = props.updateCash;
 
   const handleBuy = (ticker) => {
     //handle buy action
     const stockToBuy = data.find((stock) => stock['ticker'] == ticker);
     const buyCost = stockToBuy['price'];
-    updateCashComponent(-buyCost);
-    fetch(`http://localhost:8080/api/stock/${ticker}/buyStock/1`, {method: 'PUT'})
-    .then(console.log(`Bought stock ${ticker}`))
-    .then(console.log(`price of ${buyCost}`))
-    .catch(err => console.error(err));
+    if (cashComponent < buyCost) {
+      console.error(`Insufficient funds to purchase ${ticker}`);
+    }else {
+      updateCashComponent(-buyCost);
+      fetch(`http://localhost:8080/api/stock/${ticker}/buyStock/1`, {method: 'PUT'})
+      .then(console.log(`Bought stock ${ticker} for $${buyCost}`))
+      .catch(err => console.error(err));
+    }
   }
   const handleSell = (ticker) => {
     //handle sell action
     const stockToSell = data.find((stock) => stock['ticker'] == ticker);
     const sellCost = stockToSell['price'];
-    updateCashComponent(sellCost);
-    fetch(`http://localhost:8080/api/stock/${ticker}/sellStock/1`, {method: 'PUT'})
-    .then(console.log(`Sold stock ${ticker}`))
-    .catch(err => console.error(err));
+    const sellQty = stockToSell['quantity']
+    if(stockToSell['quantity'] == 0) {
+      console.error(`Insufficient shares to sell ${ticker}`);
+    }else {
+      updateCashComponent(sellCost);
+      fetch(`http://localhost:8080/api/stock/${ticker}/sellStock/1`, {method: 'PUT'})
+      .then(console.log(`Sold stock ${ticker} for $${sellCost}`))
+      .catch(err => console.error(err));
+    }
   }
 
   return(
@@ -159,13 +168,13 @@ function App() {
         <img src={moreinfo} style={{position:"relative", marginLeft:'auto',marginRight:"10px", top:'15px'}} width="30" height="30" alt="moreinfo"></img>
       </div>
       <div className="App-header">
-        <Watchlist data={data} updateCash={updateCashComponent}/>
+        <Watchlist data={data} updateCash={updateCashComponent} cashComponent={cashComponent}/>
         <div className="overview">
           <div className="summary">
             <Summary_component value={(Math.round(myBalance*100)/100).toLocaleString("en-US")} title="My Balance"/>
             <Summary_component value={(Math.round(parseFloat(cashComponent)*100)/100).toLocaleString("en-US")} title="Cash Balance"/>
             <Summary_component value={(Math.round(portfolioValue*100)/100).toLocaleString("en-US")} title="Profolio Value"/>
-            <Summary_component value={(Math.round(totalPnL*100)/100).toLocaleString("en-US")} title="Total P/L"/>
+            <Summary_component value={(Math.round(totalPnL*100)/100).toLocaleString("en-US")} title="Daily P/L"/>
           </div>
           <div className = "charts-block">
             <div className="charts-overview">
