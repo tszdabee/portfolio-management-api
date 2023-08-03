@@ -25,26 +25,27 @@ public class SeedDatabase {
 
     @PostConstruct
     public void init() {
-        repository1.save( new Stock("AAPL" ,"Apple Inc.", 150.50, -0.33, 100.0, "Technology") );
-        repository1.save( new Stock("GOOGL" ,"Alphabet Inc.", 2800.20, 0.18, 50.0, "Technology") );
-        repository1.save( new Stock("AMZN" ,"Amazon.com Inc.", 3250.75, -0.48, 75.0, "Technology") );
-        repository1.save( new Stock("MSFT" ,"Microsoft Corporation", 290.40, -0.21, 120.0, "Technology") );
+        repository1.save( new Stock("NFLX" ,"Netflix Inc.", 425.50, -0.45, 15 .0, "Technology") );
+        repository1.save( new Stock("AAPL" ,"Apple Inc.", 150.50, -0.33, 50.0, "Technology") );
+        repository1.save( new Stock("GOOGL" ,"Alphabet Inc.", 127.20, 0.18, 50.0, "Technology") );
+        repository1.save( new Stock("AMZN" ,"Amazon.com Inc.", 127.75, -0.48, 50.0, "Technology") );
+        repository1.save( new Stock("MSFT" ,"Microsoft Corporation", 290.40, -0.21, 60.0, "Technology") );
         repository1.save( new Stock("TSLA" ,"Tesla", 700.00, 0.38, 30.0, "Automotive") );
-        repository1.save( new Stock("JPM" ,"JPMorgan Chase & Co.", 150.80, 0.17, 90.0, "Finance") );
-        repository1.save( new Stock("NVDA" ,"NVIDIA Corporation", 220.30, -0.10, 65.0, "Technology") );
-        repository1.save( new Stock("WMT" ,"Walmart Inc.", 140.10, 0.32, 110.0, "Retail") );
-        repository1.save( new Stock("JNJ" ,"Johnson & Johnson", 170.25, 0.43, 85.0, "Healthcare") );
-        repository1.save( new Stock("BAC" ,"Bank of America Corporation", 40.50, -0.16, 150.0, "Finance") );
-        repository1.save( new Stock("XOM" ,"Exxon Mobil Corporation", 60.70, 0.07, 70.0, "Energy") );
-        repository1.save( new Stock("PFE" ,"Pfizer Inc.", 45.80, 0.21, 200.0, "Healthcare") );
-        repository1.save( new Stock("HD" ,"The Home Depot", 350.90, -0.17, 40.0, "Retail") );
-        repository1.save( new Stock("V" ,"Visa Inc.", 250.60, -0.02, 55.0, "Finance") );
-        repository1.save( new Stock("PG" ,"Procter & Gamble Co.", 135.00, -0.13, 100.0, "Consumer Goods") );
-        repository1.save( new Stock("MA" ,"Mastercard Incorporated", 390.10, 0.12, 25.0, "Finance") );
-        repository1.save( new Stock("INTC" ,"Intel Corporation", 55.25, -0.32, 80.0, "Technology") );
-        repository1.save( new Stock("CRM" ,"Salesforce", 280.00, 0.32, 45.0, "Technology") );
-        repository1.save( new Stock("VZ" ,"Verizon Communications Inc.", 55.50, 0.41, 70.0, "Telecommunications") );
-        repository1.save( new Stock("KO" ,"The Coca-Cola Company", 55.75, -0.05, 120.0, "Consumer Goods") );
+        repository1.save( new Stock("JPM" ,"JPMorgan Chase & Co.", 150.80, 0.17, 45.0, "Finance") );
+        repository1.save( new Stock("NVDA" ,"NVIDIA Corporation", 220.30, -0.10, 30.0, "Technology") );
+        repository1.save( new Stock("WMT" ,"Walmart Inc.", 140.10, 0.32, 50.0, "Retail") );
+        repository1.save( new Stock("JNJ" ,"Johnson & Johnson", 170.25, 0.43, 40.0, "Healthcare") );
+        repository1.save( new Stock("BAC" ,"Bank of America Corporation", 40.50, -0.16, 70.0, "Finance") );
+        repository1.save( new Stock("XOM" ,"Exxon Mobil Corporation", 60.70, 0.07, 35.0, "Energy") );
+        repository1.save( new Stock("PFE" ,"Pfizer Inc.", 45.80, 0.21, 100.0, "Healthcare") );
+        repository1.save( new Stock("HD" ,"The Home Depot", 350.90, -0.17, 20.0, "Retail") );
+        repository1.save( new Stock("V" ,"Visa Inc.", 250.60, -0.02, 20.0, "Finance") );
+        repository1.save( new Stock("PG" ,"Procter & Gamble Co.", 135.00, -0.13, 50.0, "Consumer Goods") );
+        repository1.save( new Stock("MA" ,"Mastercard Incorporated", 390.10, 0.12, 12.0, "Finance") );
+        repository1.save( new Stock("INTC" ,"Intel Corporation", 55.25, -0.32, 40.0, "Technology") );
+        repository1.save( new Stock("CRM" ,"Salesforce", 280.00, 0.32, 20.0, "Technology") );
+        repository1.save( new Stock("VZ" ,"Verizon Communications Inc.", 55.50, 0.41, 35.0, "Telecommunications") );
+        repository1.save( new Stock("KO" ,"The Coca-Cola Company", 55.75, -0.05, 60.0, "Consumer Goods") );
         repository2.save(new ETF("QQQ", "Invesco QQQ Trust", 100.0, 320.0, 32000.0, 375.0, 37500.0, 17.19, 5500.0,
                 0.56, 35.87, 1.05, 0.18, "Technology"));
         repository2.save(new ETF("SPY", "SPDR S&P 500 ETF Trust", 50.0, 400.0, 20000.0, 420.0, 21000.0, 10.0, 1000.0,
@@ -127,6 +128,6 @@ public class SeedDatabase {
             indexRepo.save( new Index("JKSE","Jakarta Stock Exchange Composite Index",6854.51,-0.46,60.00,"Neutral") );
             indexRepo.save( new Index("NSEI","Nifty 50",19526.55,-1.05,30.00,"Neutral") );
             indexRepo.save( new Index("BSESN","BSE Sensex 30",65782.78,-1.02,50.00,"Neutral") );
-            indexRepo.save( new Index("VNI30","VN 30",1221.32,-0.07,100.00,"Strong Buy") );    
+            indexRepo.save( new Index("VNI30","VN 30",1221.32,-0.07,50.00,"Strong Buy") );
     }
 }

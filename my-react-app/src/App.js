@@ -79,7 +79,7 @@ function App() {
     pieHole: 0.5,
     is3D: false,
     backgroundColor: "#f8f6f7",
-    chartArea: {width: "100%", height: "100%"},
+    chartArea: {width: "90%", height: "90%"},
     legend: {position:"none"}
   };
   
@@ -110,7 +110,8 @@ function App() {
     }
     else{tempSectorSummer[stock["sector"]]=1}
   })
-  formatPortData.push(["Cash",cashComponent])
+  formatPortData.push(["Cash",parseFloat(cashComponent)])
+  console.log(formatPortData)
 
   let keys = Object.keys(tempSectorSummer)
   keys.forEach(value=>{
