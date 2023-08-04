@@ -43,12 +43,12 @@ function Watchlist(props){
   }
 
   return(
-      <div className="watchlist-container" style={{backgroundColor:(data.length%2==0)?"#E5e4e2":"#f9f8f8"}}>
+      <div className="watchlist-container" style={{backgroundColor:(data.length%2==0)?"#f2f2f2":"#fffff"}}>
         <div className="watchlist-header">
           <div className="watchlist-header-element watchlist-header-element-normal">Ticker</div>
           <div className="watchlist-header-element watchlist-header-element-name">Name</div>
           <div className="watchlist-header-element watchlist-header-element-normal">Price</div>
-          <div className="watchlist-header-element watchlist-header-element-normal">Change</div>
+          <div className="watchlist-header-element watchlist-header-element-normal">% Change</div>
           <div className="watchlist-header-element watchlist-header-element-normal">Shares</div>
           <div className="watchlist-header-element watchlist-header-element-actions">Actions</div>
         </div>
@@ -58,8 +58,8 @@ function Watchlist(props){
             <div key={index} className = {(index%2==0?"odd-box":"even-box")}>
               <div key={index+"ticker"} className = {(index%2==0?"odd-box-element":"even-box-element")}>{stock["ticker"]}</div>
               <div key={index+"companyName"} className = {(index%2==0?"odd-box-element-name":"even-box-element-name")}>{stock["companyName"]}</div>
-              <div key={index+"price"} className = {(index%2==0?"odd-box-element":"even-box-element")}>{(Math.round(stock["price"]*100)/100)}</div>
-              <div key={index+"change"} className = {[(index%2==0?"odd-box-element":"even-box-element"),((stock["dailyChange"]<0)?"redText":"greenText")].join(" ")}>{(Math.round(stock["dailyChange"]*10000)/100)}</div>
+              <div key={index+"price"} className = {(index%2==0?"odd-box-element":"even-box-element")}>${(Math.round(stock["price"]*100)/100)}</div>
+              <div key={index+"change"} className = {[(index%2==0?"odd-box-element":"even-box-element"),((stock["dailyChange"]<0)?"redText":"greenText")].join(" ")}>{(Math.round(stock["dailyChange"]*10000)/100)}%</div>
               <div key={index+"quantity"} className = {(index%2==0?"odd-box-element":"even-box-element")}>{stock["quantity"]}</div> 
               <div style={{width:"120px", margin:0,padding:0,display:"inline-block",backgroundColor:(index%2==0?"#E5e4e2":"#f9f8f8"), paddingTop:"2px"}}>
                 <button onClick={() => handleBuy(stock['ticker'])} className="button button1">Buy</button>
@@ -78,7 +78,7 @@ function Summary_component(props){
 
   return(
       <div className="summary_component">
-        <div className="summary_component_title"><u>{title}</u></div>
+        <div className="summary_component_title">{title}</div>
         <b className="summary_component_value">{value}</b>    
       </div>
   )
@@ -186,12 +186,12 @@ function App() {
           <div className="summary">
             <Summary_component value={(Math.round(myBalance*100)/100).toLocaleString("en-US")} title="My Balance"/>
             <Summary_component value={(Math.round(parseFloat(cashComponent)*100)/100).toLocaleString("en-US")} title="Cash Balance"/>
-            <Summary_component value={(Math.round(portfolioValue*100)/100).toLocaleString("en-US")} title="Profolio Value"/>
+            <Summary_component value={(Math.round(portfolioValue*100)/100).toLocaleString("en-US")} title="Portfolio Value"/>
             <Summary_component value={(Math.round(totalPnL*100)/100).toLocaleString("en-US")} title="Daily P/L"/>
           </div>
           <div className = "charts-block">
             <div className="charts-overview">
-              <div className="summary_component_title"><u>Porfolio Daily Performance - Last 30 days</u></div>
+              <div className="summary_component_title"><b>Portfolio Daily Performance - Last 30 days</b></div>
               <Chart
                 chartType="AreaChart"
                 width="750px"
@@ -203,7 +203,7 @@ function App() {
             </div>
             <div className="charts-overview">
               <div className="chart-formular">
-                <div className="summary_component_title"><u>Porfolio Components</u></div>
+                <div className="summary_component_title"><b>Portfolio Components</b></div>
                 <Chart
                   chartType="PieChart"
                   width="180px"
@@ -214,7 +214,7 @@ function App() {
                 />
               </div>
               <div className="chart-formular">
-                <div className="summary_component_title"><u>Portfolio Sectors</u></div>
+                <div className="summary_component_title"><b>Portfolio Sectors</b></div>
                 <Chart
                   chartType="PieChart"
                   width="180px"
