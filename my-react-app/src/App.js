@@ -36,6 +36,8 @@ function Watchlist(props){
     const sellCost = stockToSell['price'];
     const sellQty = stockToSell['quantity']
     if(stockToSell['quantity'] == 0) {
+      setShowPopup(true); // Show the popup
+      setTimeout(() => setShowPopup(false), 3000); // Hide the popup after 3 seconds
       console.error(`Insufficient shares to sell ${ticker}`);
     }else {
       updateCashComponent(sellCost);
@@ -190,7 +192,7 @@ function App() {
           <div style={{height:"20px",marginTop:"5px"}}>
             {showPopup && (
               <div className="popup" >
-                <h1 style={{marginTop:0}}>Insufficient Funds</h1>
+                <h1 style={{marginTop:0}}>Insufficient Funds / Shares</h1>
               </div>
             )}
           </div>
