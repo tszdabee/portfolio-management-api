@@ -64,13 +64,13 @@ img{
 
 .summary{
   display:flex;
-  margin-left: 30px;
+  margin-left: 50px;
   margin-top: 40px;
 }
 .summary_component{
   display:flex;
   background-color: #edede9;
-  width: 225px;
+  width: 230px;
   height: 125px;
   border-radius: 10px;
   overflow: hidden;
@@ -118,7 +118,7 @@ img{
 }
 
 .watchlist-header{
-  background-color: navy;
+  background-color: rgb(1, 1, 88);
   padding:0;
   margin:0;
   height: 40px;
@@ -137,7 +137,7 @@ img{
 .watchlist-header-element{
   padding-bottom:5px;
   margin:0;
-  background-image: linear-gradient(navy,#223a5e);
+  background-color: rgb(1, 1, 88);
   display:inline-block;
   height:30px;
   font-size:15px;

@@ -184,10 +184,10 @@ function App() {
         <Watchlist data={data} updateCash={updateCashComponent} cashComponent={cashComponent}/>
         <div className="overview">
           <div className="summary">
-            <Summary_component value={(Math.round(myBalance*100)/100).toLocaleString("en-US")} title="My Balance"/>
-            <Summary_component value={(Math.round(parseFloat(cashComponent)*100)/100).toLocaleString("en-US")} title="Cash Balance"/>
-            <Summary_component value={(Math.round(portfolioValue*100)/100).toLocaleString("en-US")} title="Portfolio Value"/>
-            <Summary_component value={(Math.round(totalPnL*100)/100).toLocaleString("en-US")} title="Daily P/L"/>
+            <Summary_component value={"$"+(Math.round(myBalance*100)/100).toLocaleString("en-US")} title="My Balance"/>
+            <Summary_component value={"$"+(Math.round(parseFloat(cashComponent)*100)/100).toLocaleString("en-US")} title="Cash Balance"/>
+            <Summary_component value={"$"+(Math.round(portfolioValue*100)/100).toLocaleString("en-US")} title="Portfolio Value"/>
+            <Summary_component value={(totalPnL<0?"-":"")+"$"+Math.abs((Math.round(totalPnL*100)/100)).toLocaleString("en-US")} title="Daily P/L"/>
           </div>
           <div className = "charts-block">
             <div className="charts-overview">
