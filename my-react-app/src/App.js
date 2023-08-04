@@ -187,23 +187,18 @@ function App() {
       <div className="App-header">
         <Watchlist data={data} updateCash={updateCashComponent} cashComponent={cashComponent} showPopup={showPopup} setShowPopup={setShowPopup}/>
         <div className="overview">
-          {showPopup && (
-                  <div className="popup">
-                    <h1>Insufficient Funds</h1>
-                  </div>
-                )}
+          <div style={{height:"20px",marginTop:"5px"}}>
+            {showPopup && (
+              <div className="popup" >
+                <h1 style={{marginTop:0}}>Insufficient Funds</h1>
+              </div>
+            )}
+          </div>
           <div className="summary">
-<<<<<<< Updated upstream
             <Summary_component value={"$"+(Math.round(myBalance*100)/100).toLocaleString("en-US")} title="My Balance"/>
             <Summary_component value={"$"+(Math.round(parseFloat(cashComponent)*100)/100).toLocaleString("en-US")} title="Cash Balance"/>
             <Summary_component value={"$"+(Math.round(portfolioValue*100)/100).toLocaleString("en-US")} title="Portfolio Value"/>
             <Summary_component value={(totalPnL<0?"-":"")+"$"+Math.abs((Math.round(totalPnL*100)/100)).toLocaleString("en-US")} title="Daily P/L"/>
-=======
-            <Summary_component value={(Math.round(myBalance*100)/100).toLocaleString("en-US")} title="My Balance"/>
-            <Summary_component value={(Math.round(parseFloat(cashComponent)*100)/100).toLocaleString("en-US")} title="Cash Balance"/>
-            <Summary_component value={(Math.round(portfolioValue*100)/100).toLocaleString("en-US")} title="Portfolio Value"/>
-            <Summary_component value={(Math.round(totalPnL*100)/100).toLocaleString("en-US")} title="Daily P/L"/>    
->>>>>>> Stashed changes
           </div>
           
           <div className = "charts-block">
