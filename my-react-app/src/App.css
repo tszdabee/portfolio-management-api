@@ -151,7 +151,8 @@ img{
   border-right: #c2c1bd;
 }
 .logo{
-  background-color: #2243ff;
+  
+  background-image: linear-gradient(#005DAA, navy);
   flex-direction: row;
   display: flex;
   

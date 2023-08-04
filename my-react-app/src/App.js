@@ -1,9 +1,12 @@
 import React, {Component, useEffect, useState} from "react";
 import {Chart} from "react-google-charts";
-import logo from './logo.png';
+import logo from './icons/logo.png';
 import "./App.css";
-import moreinfo from "./menu-symbol-of-three-parallel-lines-svgrepo-com.svg"
-import tradesense from './tradesense-logo.png'
+import moreinfo from "./icons/menu.png"
+import rbclogo from "./icons/rbc-logo.svg"
+import tradesense from './icons/tradesense-logo.png'
+import notif from "./icons/notif.png"
+import profile from "./icons/user.png"
 
 function Watchlist(props){
 
@@ -168,10 +171,14 @@ function App() {
   return (
     
     <div className="App">
-      <div className="logo">
-        <img src="https://www.rbcroyalbank.com/dvl/v1.0/assets/images/logos/rbc-logo-shield.svg"  width="48" height="60" alt="RBC"></img>
-        <img src={tradesense} height="60" alt="Tradesense Logo"></img>
-        <img src={moreinfo} style={{position:"relative", marginLeft:'auto',marginRight:"10px", top:'15px'}} width="30" height="30" alt="moreinfo"></img>
+      <div className="logo" style={{ display:"block", overflow:"hidden"}}>
+        <img src={rbclogo} style={{float: "left"}} height="60" alt="RBC"></img>
+        <img src={tradesense} style={{float: "left"}} height="60" alt="Tradesense Logo"></img>
+        <div style={{ float:"right", marginTop:"15px"}}>
+          <img src={notif} width="30" height="30" alt="notif"></img>
+          <img src={profile} style={{marginLeft:"10px"}} width="30" height="30" alt="profile"></img>
+          <img src={moreinfo} style={{marginLeft:"10px"}} width="30" height="30" alt="moreinfo"></img>
+        </div>
       </div>
       <div className="App-header">
         <Watchlist data={data} updateCash={updateCashComponent} cashComponent={cashComponent}/>
